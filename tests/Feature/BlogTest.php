@@ -34,8 +34,17 @@ class BlogTest extends TestCase
     public function admin_can_delete_a_blog()
     {
         $blog = factory(Blog::class)->create();
-        $this->assertDatabaseHas('blogs', ['title' => $blog->title]);
         $this->delete('/blog/1');
         $this->assertDatabaseMissing('blogs', ['title' => $blog->title]);
+    }
+
+    /** @test */
+    public function admin_can_update_a_blog()
+    {
+        $blog = factory(Blog::class)->create();
+        $this->patch("/blog/{$blog->id}", [
+            'title' => 'new title'
+        ]);
+        $this->assertDatabaseHas('blogs', ['title' => 'new title']);
     }
 }

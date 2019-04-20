@@ -7,12 +7,22 @@ use App\Blog;
 
 class BlogController extends Controller
 {
+    public function index()
+    {
+        return view('blog.index');
+    }
+
     public function store(Request $request)
     {
         Blog::create($request->all());
     }
 
-    public function delete(Blog $blog)
+    public function update(Blog $blog, Request $request)
+    {
+        $blog->update($request->all());
+    }
+
+    public function destroy(Blog $blog)
     {
         $blog->delete();
     }
