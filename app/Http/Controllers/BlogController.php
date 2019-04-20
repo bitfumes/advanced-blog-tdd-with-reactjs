@@ -11,4 +11,9 @@ class BlogController extends Controller
     {
         Blog::create($request->all());
     }
+
+    public function delete(Blog $blog)
+    {
+        $blog->delete();
+    }
 }

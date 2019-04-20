@@ -22,10 +22,24 @@ class BlogTest extends TestCase
     /** @test */
     public function admin_can_store_new_blog()
     {
+        $this->createBlog();
+        $this->assertDatabaseHas('blogs', ['title' => 'Blog title']);
+    }
+
+    /** @test */
+    public function admin_can_delete_a_blog()
+    {
+        $this->createBlog();
+        $this->assertDatabaseHas('blogs', ['title' => 'Blog title']);
+        $this->delete('/blog/1');
+        $this->assertDatabaseMissing('blogs', ['title' => 'Blog title']);
+    }
+
+    public function createBlog()
+    {
         $this->post('/blog', [
             'title' => 'Blog title',
             'body' => 'blog body'
         ]);
-        $this->assertDatabaseHas('blogs', ['title' => 'Blog title']);
     }
 }
