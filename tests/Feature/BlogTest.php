@@ -16,4 +16,14 @@ class BlogTest extends TestCase
         $res = $this->get('/blog');
         $res->assertSee('blogs');
     }
+
+    /** @test */
+    public function admin_can_store_new_blog()
+    {
+        $this->post('/blog', [
+            'title' => 'Blog title',
+            'body' => 'blog body'
+        ]);
+        $this->assertDatabaseHas('blogs', ['title' => 'Blog title']);
+    }
 }
