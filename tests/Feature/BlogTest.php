@@ -16,14 +16,14 @@ class BlogTest extends TestCase
      */
     public function user_can_get_all_blogs()
     {
-        $res = $this->get('/blog');
+        $res = $this->get(route('blog.index'));
         $res->assertSee('blogs');
     }
 
     /** @test */
     public function admin_can_store_new_blog()
     {
-        $this->post('/blog', [
+        $this->post(route('blog.store'), [
             'title' => 'Blog title',
             'body' => 'blog body'
         ]);
@@ -34,7 +34,7 @@ class BlogTest extends TestCase
     public function admin_can_delete_a_blog()
     {
         $blog = factory(Blog::class)->create();
-        $this->delete('/blog/1');
+        $this->delete(route('blog.destroy', '1'));
         $this->assertDatabaseMissing('blogs', ['title' => $blog->title]);
     }
 
@@ -42,7 +42,7 @@ class BlogTest extends TestCase
     public function admin_can_update_a_blog()
     {
         $blog = factory(Blog::class)->create();
-        $this->patch("/blog/{$blog->id}", [
+        $this->patch(route('blog.update', $blog->id), [
             'title' => 'new title'
         ]);
         $this->assertDatabaseHas('blogs', ['title' => 'new title']);
