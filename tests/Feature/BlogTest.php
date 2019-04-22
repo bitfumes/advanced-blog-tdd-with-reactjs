@@ -16,8 +16,9 @@ class BlogTest extends TestCase
      */
     public function user_can_get_all_blogs()
     {
+        $blog = factory(Blog::class)->create();
         $res = $this->get(route('blog.index'));
-        $res->assertSee('blogs');
+        $res->assertSee($blog->title);
     }
 
     /** @test */
