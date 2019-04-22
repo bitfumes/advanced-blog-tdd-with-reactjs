@@ -26,7 +26,9 @@ class BlogTest extends TestCase
         $this->post(route('blog.store'), [
             'title' => 'Blog title',
             'body' => 'blog body'
-        ]);
+        ])
+            ->assertRedirect(route('blog.create'))
+            ->assertSessionHas('message');
         $this->assertDatabaseHas('blogs', ['title' => 'Blog title']);
     }
 
