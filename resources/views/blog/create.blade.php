@@ -17,7 +17,7 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}"  autocomplete="title" autofocus>
 
                                 @if ($errors->has('title'))
                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                             <label for="body" class="col-md-4 col-form-label text-md-right">Body</label>
 
                             <div class="col-md-6">
-                                <textarea required class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body">
+                                <textarea  class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body">
                                     {{ old('body') }}
                                 </textarea>
 
